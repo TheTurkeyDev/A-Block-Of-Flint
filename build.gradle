@@ -4,49 +4,71 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
 
 version = "1.0"
 group= "com.turkey.flintBlock"
 archivesBaseName = "A Block of Flint"
 
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
-}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-minecraft {
-    version = "1.12-14.21.0.2373"
-    
-    runDir = "run-1.12"
+minecraft {  
+	mappings channel: 'snapshot', version: '20180921-1.13'
 	
-	mappings = "snapshot_20161220"
+	runs {
+        client {
+            workingDirectory project.file('run-1.13')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                charcoalblock {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run-1.13')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                charcoalblock {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
 }
 
-processResources
-{
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-    
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-    
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.219'
 }
 
-task deobfJar(type: Jar) {
-        from sourceSets.main.output
-        appendix = 'deobf'
-}
- 
-artifacts {
-        archives deobfJar
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "flintblock",
+            "Specification-Vendor": "turkey2349",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"turkey2349",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }
