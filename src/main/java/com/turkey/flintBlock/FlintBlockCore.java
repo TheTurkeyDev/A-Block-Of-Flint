@@ -2,8 +2,8 @@ package com.turkey.flintBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,7 +20,7 @@ public class FlintBlockCore
 	@SubscribeEvent
 	public static void onBlockRegistry(RegistryEvent.Register<Block> e)
 	{
-		theBlock = new Block(Block.Properties.create(Material.GROUND).hardnessAndResistance(5));
+		theBlock = new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(5));
 		theBlock.setRegistryName(MODID, "flint_block");
 		e.getRegistry().register(theBlock);
 	}
@@ -28,7 +28,7 @@ public class FlintBlockCore
 	@SubscribeEvent
 	public static void onItemRegistry(RegistryEvent.Register<Item> e)
 	{
-		ItemBlock ib = new ItemBlock(theBlock, (new Item.Properties()).group(ItemGroup.BUILDING_BLOCKS));
+		BlockItem ib = new BlockItem(theBlock, (new Item.Properties()).group(ItemGroup.BUILDING_BLOCKS));
 		ib.setRegistryName(theBlock.getRegistryName());
 		e.getRegistry().register(ib);
 	}

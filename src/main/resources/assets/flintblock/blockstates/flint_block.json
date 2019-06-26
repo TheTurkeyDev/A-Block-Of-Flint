@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "flintblock:flint_block" }
+        "": { "model": "flintblock:block/flint_block" }
     }
 }
