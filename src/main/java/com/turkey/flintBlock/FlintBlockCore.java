@@ -15,12 +15,12 @@ public class FlintBlockCore
 {
 	public static final String MODID = "flintblock";
 
-	public static Block theBlock;
+	private static Block theBlock;
 
 	@SubscribeEvent
 	public static void onBlockRegistry(RegistryEvent.Register<Block> e)
 	{
-		theBlock = new Block(Block.Properties.create(Material.EARTH).hardnessAndResistance(5));
+		theBlock = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.0F, 6.0F));
 		theBlock.setRegistryName(MODID, "flint_block");
 		e.getRegistry().register(theBlock);
 	}
