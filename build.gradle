@@ -12,17 +12,17 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
 version = "1.0"
-group= "com.turkey.flintBlock"
+group = "com.turkey.flintBlock"
 archivesBaseName = "A Block of Flint"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-minecraft {  
-	mappings channel: 'snapshot', version: '20190621-1.14.2'
-	
-	runs {
+minecraft {
+    mappings channel: 'snapshot', version: '20190621-1.14.2'
+
+    runs {
         client {
-            workingDirectory project.file('run-1.14')
+            workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -31,14 +31,14 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                flintblock {
+                examplemod {
                     source sourceSets.main
                 }
             }
         }
 
         server {
-            workingDirectory project.file('run-1.14')
+            workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -47,7 +47,25 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                flintblock {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                examplemod {
                     source sourceSets.main
                 }
             }
@@ -56,19 +74,19 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.0.75'
+    minecraft 'net.minecraftforge:forge:1.15.1-30.0.24'
 }
 
 jar {
     manifest {
         attributes([
-            "Specification-Title": "flintblock",
-            "Specification-Vendor": "turkey2349",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"turkey2349",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Specification-Title"     : "flintblock",
+                "Specification-Vendor"    : "turkey2349",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "turkey2349",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
