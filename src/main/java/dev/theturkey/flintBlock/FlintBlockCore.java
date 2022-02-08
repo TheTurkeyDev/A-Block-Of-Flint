@@ -1,10 +1,11 @@
-package com.turkey.flintBlock;
+package dev.theturkey.flintBlock;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +21,7 @@ public class FlintBlockCore
 	@SubscribeEvent
 	public static void onBlockRegistry(RegistryEvent.Register<Block> e)
 	{
-		theBlock = new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.0F, 6.0F));
+		theBlock = new Block(BlockBehaviour.Properties.of(Material.DIRT).strength(5.0F, 6.0F));
 		theBlock.setRegistryName(MODID, "flint_block");
 		e.getRegistry().register(theBlock);
 	}
@@ -28,7 +29,7 @@ public class FlintBlockCore
 	@SubscribeEvent
 	public static void onItemRegistry(RegistryEvent.Register<Item> e)
 	{
-		BlockItem ib = new BlockItem(theBlock, (new Item.Properties()).group(ItemGroup.BUILDING_BLOCKS));
+		BlockItem ib = new BlockItem(theBlock, (new Item.Properties()).tab(CreativeModeTab.TAB_BUILDING_BLOCKS));
 		ib.setRegistryName(theBlock.getRegistryName());
 		e.getRegistry().register(ib);
 	}

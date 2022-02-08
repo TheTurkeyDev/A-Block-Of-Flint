@@ -1,20 +1,14 @@
     
 modLoader="javafml"
-loaderVersion="[25,)"
-issueTrackerURL="https://github.com/Turkey2349/A-Block-Of-Flint/issues"
+loaderVersion="[39,)"
+issueTrackerURL="https://github.com/TheTurkeyDev/A-Block-Of-Flint/issues"
+displayURL="https://minecraft.curseforge.com/projects/a-block-of-flint"
+authors="TurkeyDev"
+license="MIT"
 [[mods]]
     modId="flintblock"
-    version="1.0"
+    version="1.2"
     displayName="A Block of Flint"
-    displayURL="https://minecraft.curseforge.com/projects/a-block-of-flint"
-    authors="Turkey2349"
-    license="MIT"
     description='''
     What do you think it does?
     '''
-    [[dependencies.examplemod]]
-        modId="forge"
-        mandatory=true
-        versionRange="[25,)"
-        ordering="NONE"
-        side="BOTH"
